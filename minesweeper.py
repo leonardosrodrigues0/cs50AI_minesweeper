@@ -248,9 +248,11 @@ class MinesweeperAI():
                     if subset != superset and subset.cells.issubset(superset.cells):
                         new_cells = superset.cells - subset.cells
                         new_count = superset.count - subset.count
-                        self.knowledge.append(Sentence(new_cells, new_count))
+                        new_sentence = Sentence(new_cells, new_count)
 
-                        changed = True
+                        if new_sentence not in self.knowledge:
+                            self.knowledge.append(Sentence(new_cells, new_count))
+                            changed = True
 
             if changed == False:
                 break
